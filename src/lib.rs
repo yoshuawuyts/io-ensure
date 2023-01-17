@@ -1,8 +1,22 @@
-//! Prototype of the `std::io::ensure` family of macros
-
 #![forbid(unsafe_code, future_incompatible, rust_2018_idioms)]
 #![deny(missing_debug_implementations, nonstandard_style)]
 #![warn(missing_docs, unreachable_pub)]
+
+//! Prototype of the `std::io::ensure` family of macros.
+//!
+//! # Examples
+//!
+//! ```
+//! use io_ensure::*;
+//! use std::io::ErrorKind;
+//!
+//! # fn main() -> std::io::Result<()> {
+//! let a = 3;
+//! let b = 1 + 2;
+//! ensure!(a == b, ErrorKind::Other);
+//! ensure!(a == b, ErrorKind::Interrupted, "we are testing addition with {} and {}", a, b);
+//! # Ok(()) }
+//! ```
 
 /// Creates an [`io::Error`] using optional interpolation of runtime expressions.
 ///
@@ -69,14 +83,13 @@ macro_rules! format_err {
 /// # Examples
 ///
 /// ```
-/// # use io_ensure::*;
+/// use io_ensure::*;
 /// use std::io::ErrorKind;
 ///
 /// # fn main() -> std::io::Result<()> {
 /// let a = 3;
 /// let b = 1 + 2;
 /// ensure!(a == b, ErrorKind::Other);
-///
 /// ensure!(a == b, ErrorKind::Interrupted, "we are testing addition with {} and {}", a, b);
 /// # Ok(()) }
 /// ```
@@ -118,7 +131,7 @@ macro_rules! ensure {
 /// # Examples
 ///
 /// ```
-/// # use io_ensure::*;
+/// use io_ensure::*;
 /// use std::io::ErrorKind;
 ///
 /// # fn main() -> std::io::Result<()> {
@@ -159,14 +172,13 @@ macro_rules! ensure_eq {
 /// # Examples
 ///
 /// ```
-/// # use io_ensure::*;
+/// use io_ensure::*;
 /// use std::io::ErrorKind;
 ///
 /// # fn main() -> std::io::Result<()> {
 /// let a = 2;
 /// let b = 3;
 /// ensure_ne!(a, b, ErrorKind::Other);
-///
 /// ensure_ne!(a, b, ErrorKind::Interrupted, "we are testing the values {} and {} are not equal", a, b);
 /// # Ok(()) }
 /// ```
